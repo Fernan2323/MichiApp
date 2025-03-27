@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const CAT_FACT_RANDOM = 'https://catfact.ninja/fact'
 
 export function useGetFact () {
-  const [randomFact, setRandomFact] = useState()
+  const [randomFact, setRandomFact] = useState('')
   const [error, setError] = useState(null)
 
   function getFact () {
@@ -15,9 +15,8 @@ export function useGetFact () {
       .catch(error => setError(error))
   }
 
-  function handleForm ({ inputValue, setInputValue }) {
+  function handleForm ({ inputValue }) {
     setRandomFact(inputValue)
-    setInputValue('')
   }
 
   useEffect(getFact, [])
