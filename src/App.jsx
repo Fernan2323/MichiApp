@@ -14,44 +14,63 @@ export const App = () => {
   }
 
   return (
-    <main className='flex flex-col gap-y-4 justify-center items-center h-[100vh] bg-gradient-to-r from-indigo-500 via-sky-500 to-indigo-500 box-border'>
-      <header className='h-[20%] text-center mt-6 '>
-        <h1 className='font-comic text-white font-semibold text-[40px] '>MichiApp 🐱</h1>
+    <main className='grid grid-rows-[auto,1fr,auto]  min-h-screen bg-gradient-to-r from-indigo-500 via-sky-500 to-indigo-500 p-4'>
+      {/* Header */}
+      <header className='flex flex-col items-center text-center'>
+        <h1 className='font-comic text-white font-semibold text-3xl sm:text-4xl'>MichiApp 🐱</h1>
+
         <button
-          className='p-[5px] font-semibold rounded-md mt-6 mb-6 bg-gradient-to-r text-white from-pink-400 to-blue-500 hover:from-pink-500 hover:to-orange-500'
+          className='px-4 py-2 font-semibold rounded-md mt-4 bg-gradient-to-r text-white from-pink-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 transition-all duration-300'
           onClick={getFact}
         >
           {isLoadingCat ? 'Espere...' : 'Random cat'}
         </button>
-        <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center md:flex-row '>
-          <input required value={inputValue} onChange={(e) => setInputValue(e.target.value)} className='sm:w-[550px] p-[5px] text-center mb-3 md:mb-0 md:mr-3 rounded-sm focus:outline-none shadow-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500' type='text' placeholder='Como te sientes?' />
-          <button type='submit' className='p-[5px] w-auto font-semibold rounded-md bg-gradient-to-r text-white from-pink-400 to-blue-500 hover:from-pink-500 hover:to-orange-500'>Buscar Gato</button>
+
+        <form onSubmit={handleSubmit} className='grid gap-3 sm:flex sm:items-center mt-4'>
+          <input
+            required
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className='w-full sm:w-[550px] p-2 text-center rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            type='text'
+            placeholder='¿Cómo te sientes?'
+          />
+          <button
+            type='submit'
+            className='px-4 py-2 font-semibold rounded-md bg-gradient-to-r text-white from-pink-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 transition-all duration-300'
+          >
+            Buscar Gato
+          </button>
         </form>
       </header>
 
-      {
-          isLoadingCat
-            ? (
-              <h2 className='font-comic text-white font-semibold text-[40px] h-[90%] flex place-items-center'>
-                Cargando su gato...🐈
-              </h2>
-              )
-            : (
-              <section className='flex flex-col justify-center items-center w-[100%] h-[70%]'>
-                <img
-                  className='w-[80%] h-[300px] md:h-[400px] sm:w-[600px]'
-                  src={imgCat}
-                  alt='Imagen aleatoria de un gato'
-                />
-                <p className='text-[15px] md:text-[20px] mt-[25px] w-[80%] text-white text-center'>
-                  {randomFact}
-                </p>
-              </section>
-              )
-        }
+      {/* Contenido principal */}
+      <section className='grid place-items-center h-full'>
+        {isLoadingCat
+          ? (
+            <h2 className='font-comic text-white font-semibold text-2xl sm:text-3xl'>
+              Cargando su gato... 🐈
+            </h2>
+            )
+          : (
+            <div className='grid gap-4 justify-items-center'>
+              <img
+                className='w-[80%] sm:w-[600px] max-w-full h-[300px] sm:h-[400px] rounded-lg shadow-lg'
+                src={imgCat}
+                alt='Imagen aleatoria de un gato'
+              />
+              <p className='text-sm sm:text-lg text-white text-center w-[80%]'>
+                {randomFact}
+              </p>
+            </div>
+            )}
+      </section>
 
-      <footer className='h-[10%] w-[100%] text-center bg-black text-white text-[20px] font-semibold place-content-center'>Developed by Fernan-Dev</footer>
-
+      {/* Footer corregido */}
+      <footer className='w-full text-center bg-neutral-900 text-white text-lg font-semibold py-4 mt-auto'>
+        Developed by Fernan-Dev
+      </footer>
     </main>
+
   )
 }
